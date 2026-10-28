@@ -42,14 +42,14 @@ export default function Institutions() {
             {CLIENT_LOGOS.map((logo) => (
               <div
                 key={logo.alt}
-                className="flex items-center justify-center rounded-xl border border-line bg-paper/60 p-5 transition-all duration-200 hover:border-line-strong hover:bg-white hover:shadow-sm"
+                className="flex items-center justify-center rounded-xl border border-line bg-paper/60 p-3 sm:p-5 transition-all duration-200 hover:border-line-strong hover:bg-white hover:shadow-sm"
               >
                 <Image
                   src={logo.src}
                   alt={logo.alt}
                   width={120}
                   height={64}
-                  className="h-16 w-auto object-contain"
+                  className="h-10 w-auto object-contain sm:h-16"
                 />
               </div>
             ))}

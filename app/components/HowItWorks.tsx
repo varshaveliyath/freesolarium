@@ -26,7 +26,7 @@ export default function HowItWorks() {
         </Reveal>
 
         {/* ── Two-column: 40% cards | 60% image ── */}
-        <div className="mt-10 flex flex-col gap-8 lg:flex-row lg:items-center lg:gap-8">
+        <div className="mt-8 flex flex-col gap-4 lg:flex-row lg:items-center lg:gap-8">
 
           {/* Left: collapsed accordion cards — 40% */}
           <div className="flex w-full flex-col gap-2 lg:w-1/2 lg:shrink-0">
@@ -65,7 +65,7 @@ export default function HowItWorks() {
           </div>
 
           {/* Right: image — 60% */}
-          <Reveal delay={80} className="w-full lg:w-1/2 lg:self-center">
+          <Reveal delay={80} className="hidden w-full lg:block lg:w-1/2 lg:self-center">
             <div className="relative">
               <div
                 className="absolute -inset-4 rounded-[28px] bg-orange/10 blur-2xl"

@@ -71,7 +71,7 @@ export default function Hero() {
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-navy-line/60 to-transparent" />
       </div>
 
-      <div className="relative z-10 mx-auto grid max-w-[1200px] gap-10 px-5 pb-14 pt-16 lg:grid-cols-[1.2fr_0.8fr] lg:items-center lg:gap-12 lg:px-6 lg:pb-22 lg:pt-24">
+      <div className="relative z-10 mx-auto grid max-w-[1200px] gap-8 px-4 pb-12 pt-14 sm:px-5 lg:grid-cols-[1.2fr_0.8fr] lg:items-center lg:gap-12 lg:px-6 lg:pb-22 lg:pt-24">
         <Reveal>
           {/* Badge */}
           <p className="flex items-center gap-2.5 text-[11px] font-bold uppercase tracking-[0.2em] text-orange">
@@ -80,7 +80,7 @@ export default function Hero() {
           </p>
 
           {/* Headline */}
-          <h1 className="mt-5 max-w-[16ch] text-[clamp(2.7rem,6.8vw,4.6rem)] font-extrabold leading-[1.0] tracking-[-0.04em] text-white">
+          <h1 className="mt-4 max-w-[16ch] text-[clamp(2.2rem,6.8vw,4.6rem)] font-extrabold leading-[1.0] tracking-[-0.04em] text-white">
             Solar for your home at{" "}
             <span className="mt-1.5 inline-block rounded-xl bg-orange px-3.5 pb-1 pt-0.5 text-ink">
               {inr(HERO_PRICE)}
@@ -139,8 +139,8 @@ export default function Hero() {
           </p>
         </Reveal>
 
-        {/* ── Right card ── */}
-        <Reveal delay={140}>
+        {/* ── Right card — hidden on mobile ── */}
+        <Reveal delay={140} className="hidden lg:block">
           <TiltCard>
             <div className="relative mx-auto w-full max-w-[400px] overflow-hidden rounded-2xl shadow-[0_40px_80px_-20px_rgba(2,43,78,0.9)] lg:max-w-none">
 

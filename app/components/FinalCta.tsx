@@ -33,7 +33,7 @@ export default function FinalCta() {
             <div className="pointer-events-none absolute -bottom-20 right-1/3 h-64 w-64 rounded-full bg-orange/10 blur-3xl" aria-hidden="true" />
 
             {/* ── Content ── */}
-            <div className="relative z-10 flex flex-wrap items-center justify-between gap-8 p-8 sm:p-12 lg:p-16">
+            <div className="relative z-10 flex flex-col gap-8 p-6 sm:p-10 lg:flex-row lg:items-center lg:justify-between lg:p-16">
 
               {/* Left: text block */}
               <div className="max-w-[560px]">
@@ -74,7 +74,7 @@ export default function FinalCta() {
               </div>
 
               {/* Right: CTA card */}
-              <div className="flex flex-col gap-3 rounded-2xl border border-white/15 bg-white/10 p-6 backdrop-blur-md sm:min-w-[280px]">
+              <div className="w-full flex-col gap-3 rounded-2xl border border-white/15 bg-white/10 p-5 backdrop-blur-md flex sm:min-w-[280px] lg:w-auto">
                 {/* Price display */}
                 <div className="text-center">
                   <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-white/50">

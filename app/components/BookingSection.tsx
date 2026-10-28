@@ -444,6 +444,51 @@ export default function BookingSection() {
             </div>
           </div>
 
+          {/* ── Get Quotation ── */}
+          <div className="mt-6">
+            <p className="mb-2.5 text-[13px] font-bold text-navy">
+              <span className="mr-1.5 text-orange">3</span> Get quotation
+            </p>
+            <p className="mb-3 text-[11.5px] leading-relaxed text-muted">
+              Download the detailed system quotation for your category before booking.
+            </p>
+            <div className="flex flex-wrap gap-2.5">
+              {/* General quotation */}
+              <a
+                href="/quotation-general.pdf"
+                download="Solarium-Quotation-General.pdf"
+                className="group inline-flex min-h-[64px] flex-1 basis-[158px] flex-col items-start justify-center gap-0.5 rounded-xl border-2 border-line-strong bg-white px-4 py-3 text-left transition-all duration-200 hover:border-orange/50 hover:bg-orange-soft/40"
+              >
+                <span className="flex items-center gap-1.5 text-[13px] font-bold text-navy">
+                  <svg className="h-4 w-4 shrink-0 text-orange-deep" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 10v6m0 0-3-3m3 3 3-3M3 17v2a2 2 0 002 2h14a2 2 0 002-2v-2M16 6l-4-4-4 4" />
+                  </svg>
+                  General Category
+                </span>
+                <span className="pl-5.5 text-[11px] font-medium text-muted">
+                  Download PDF quotation
+                </span>
+              </a>
+
+              {/* SC / ST quotation */}
+              <a
+                href="/quotation-sc-st.pdf"
+                download="Solarium-Quotation-SC-ST.pdf"
+                className="group inline-flex min-h-[64px] flex-1 basis-[158px] flex-col items-start justify-center gap-0.5 rounded-xl border-2 border-line-strong bg-white px-4 py-3 text-left transition-all duration-200 hover:border-orange/50 hover:bg-orange-soft/40"
+              >
+                <span className="flex items-center gap-1.5 text-[13px] font-bold text-navy">
+                  <svg className="h-4 w-4 shrink-0 text-orange-deep" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 10v6m0 0-3-3m3 3 3-3M3 17v2a2 2 0 002 2h14a2 2 0 002-2v-2M16 6l-4-4-4 4" />
+                  </svg>
+                  SC / ST Category
+                </span>
+                <span className="pl-5.5 text-[11px] font-medium text-muted">
+                  Download PDF quotation
+                </span>
+              </a>
+            </div>
+          </div>
+
           <div className="mt-8 rounded-2xl border border-line bg-paper p-5 text-navy shadow-sm sm:p-7">
             <ol className="mb-6 flex items-center gap-2" aria-label="Order progress">
               {STEP_LABELS.map((label, index) => {

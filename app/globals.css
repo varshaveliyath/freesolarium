@@ -1,0 +1,150 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #034982;
+  --color-navy-deep: #022b4e;
+  --color-navy-soft: #0a5d9e;
+  --color-navy-line: #2c6f9f;
+  --color-paper: #f7f9fc;
+  --color-paper-deep: #edf3f9;
+  --color-orange: #f58401;
+  --color-orange-deep: #b45309;
+  --color-orange-soft: #fff2e4;
+  --color-mist: #e9f2f9;
+  --color-accent: #b45309;
+  --color-accent-bright: #d96a0b;
+  --color-ink: #072d4d;
+  --color-body: #3d566d;
+  --color-muted: #5d7287;
+  --color-line: #dbe5ef;
+  --color-line-strong: #bfd2e1;
+}
+
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+  }
+
+  [id] {
+    scroll-margin-top: 96px;
+  }
+
+  ::selection {
+    background: #ffd8a8;
+    color: var(--color-navy-deep);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+}
+
+/* ── Background textures ───────────────────────────────────────────── */
+
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(3, 73, 130, 0.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(3, 73, 130, 0.055) 1px, transparent 1px);
+  background-size: 52px 52px;
+}
+
+.bg-dots {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.16) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+.sun-glow {
+  background: radial-gradient(
+    closest-side,
+    rgba(245, 132, 1, 0.32),
+    rgba(245, 132, 1, 0.09) 58%,
+    rgba(245, 132, 1, 0)
+  );
+}
+
+/* ── Scroll reveal ─────────────────────────────────────────────────── */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── Marquee ───────────────────────────────────────────────────────── */
+
+@keyframes marquee-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-left 38s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* ── Small touches ─────────────────────────────────────────────────── */
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .marquee-track {
+    animation: none;
+  }
+}

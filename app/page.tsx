@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import BookingSection from "./components/BookingSection";
+
 import Faq from "./components/Faq";
 import FinalCta from "./components/FinalCta";
 import Footer from "./components/Footer";
@@ -35,7 +35,7 @@ export default function Page() {
       <Header />
       <main>
         <Hero />
-        <BookingSection />
+
         <TrustStrip />
         <ProductSection />
         <Institutions />

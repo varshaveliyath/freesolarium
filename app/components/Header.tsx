@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ArrowUpRight, Menu, Phone, X } from "lucide-react";
 import { site } from "../lib/content";
@@ -26,30 +26,48 @@ function BrandLogo() {
 }
 
 export default function Header() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen]       = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden]   = useState(false);
+
+  const lastY = useRef(0);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
-    onScroll();
+    function onScroll() {
+      const y = window.scrollY;
+      const diff = y - lastY.current;
+
+      // Only trigger hide/show after passing 80px from top
+      if (y > 80) {
+        if (diff > 6)  setHidden(true);   // scrolling down → hide
+        if (diff < -6) setHidden(false);  // scrolling up   → show
+      } else {
+        setHidden(false); // always show near top
+      }
+
+      setScrolled(y > 12);
+      lastY.current = y;
+    }
+
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
     if (!open) return;
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
-    };
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b border-line bg-white/95 text-navy backdrop-blur-md transition-shadow duration-300 ${
-        scrolled ? "shadow-[0_18px_40px_-30px_rgba(3,73,130,0.45)]" : ""
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 border-b border-line bg-white/95 text-navy backdrop-blur-md
+        rounded-b-2xl
+        transition-all duration-300 ease-in-out
+        ${scrolled ? "shadow-[0_18px_40px_-30px_rgba(3,73,130,0.45)]" : ""}
+        ${hidden ? "-translate-y-full" : "translate-y-0"}
+      `}
     >
       <div className="mx-auto flex h-[72px] max-w-[1200px] items-center justify-between gap-4 px-5 lg:px-6">
         <a
@@ -98,7 +116,7 @@ export default function Header() {
           </a>
           <button
             type="button"
-            onClick={() => setOpen((value) => !value)}
+            onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -112,7 +130,7 @@ export default function Header() {
       {open && (
         <div
           id="mobile-nav"
-          className="border-t border-white/10 bg-navy px-5 pb-6 pt-3 lg:hidden"
+          className="rounded-b-2xl border-t border-white/10 bg-navy px-5 pb-6 pt-3 lg:hidden"
         >
           <nav className="flex flex-col" aria-label="Mobile">
             {NAV.map((item) => (

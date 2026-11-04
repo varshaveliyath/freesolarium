@@ -316,19 +316,19 @@ function QuotationCard() {
 /* ─── Main export ─── */
 export default function Hero() {
   return (
-    <section id="top" className="relative flex min-h-screen items-center overflow-hidden">
-      {/* ── Full-bleed background image ── */}
-      <div className="absolute inset-0 z-0">
+    <section id="top" className="relative flex min-h-screen items-center overflow-hidden bg-[#022b4e]">
+      {/* ── Full-bleed background image (constrained height + right-shifted focal point on mobile so it doesn't over-zoom) ── */}
+      <div className="absolute inset-x-0 top-0 z-0 h-[500px] sm:h-[560px] lg:inset-0 lg:h-full">
         <Image
           src="/images/hero-banner.png"
           alt="Solarium rooftop solar system"
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center"
+          className="object-cover object-[74%_center] lg:object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#022b4e]/55 via-[#034982]/35 to-[#034982]/20" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#022b4e]/30 via-transparent to-[#022b4e]/15" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#022b4e]/65 via-[#034982]/45 to-[#034982]/25 lg:from-[#022b4e]/55 lg:via-[#034982]/35 lg:to-[#034982]/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#022b4e] via-[#022b4e]/25 to-[#022b4e]/20 lg:from-[#022b4e]/30 lg:via-transparent lg:to-[#022b4e]/15" />
       </div>
 
       {/* Decorative dots */}

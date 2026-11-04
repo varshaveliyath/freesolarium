@@ -112,11 +112,11 @@ export default function SixPillars() {
       <div className="py-14 lg:hidden">
         <div className="mx-auto max-w-[1200px] px-5">
           <Reveal direction="left">
-            <p className="flex items-center gap-2.5 text-[11px] font-bold uppercase tracking-[0.2em] text-orange">
+            <p className="flex items-center gap-2.5 text-[14px] font-bold uppercase tracking-[0.2em] text-orange">
               <span className="h-px w-8 bg-orange/50" aria-hidden="true" />
               The 6S
             </p>
-            <h2 className="mt-3 text-[clamp(1.75rem,4.2vw,2.6rem)] font-bold leading-[1.08] tracking-[-0.035em] text-navy text-balance">
+            <h2 className="mt-3 text-[clamp(2.2rem,6vw,3.6rem)] font-bold leading-[1.04] tracking-[-0.035em] text-navy text-balance">
               Built on six non-negotiables.
             </h2>
           </Reveal>
@@ -147,7 +147,7 @@ export default function SixPillars() {
                 <span className="font-display text-[19px] font-bold leading-none tracking-[-0.03em] text-orange/85">
                   {item.n}
                 </span>
-                <h3 className="mt-4 whitespace-pre-line font-display text-[15px] font-semibold leading-[1.25] tracking-[-0.015em] text-white/95">
+                <h3 className="mt-4 whitespace-pre-line font-display text-[24px] font-bold leading-[1.15] tracking-[-0.025em] text-white">
                   {item.title}
                 </h3>
               </div>
@@ -171,11 +171,11 @@ export default function SixPillars() {
             <div className="flex items-end justify-between gap-8">
               <Reveal direction="left">
                 <div>
-                  <p className="flex items-center gap-2.5 text-[11px] font-bold uppercase tracking-[0.2em] text-orange">
+                  <p className="flex items-center gap-2.5 text-[14px] font-bold uppercase tracking-[0.2em] text-orange">
                     <span className="h-px w-8 bg-orange/50" aria-hidden="true" />
                     The 6S
                   </p>
-                  <h2 className="mt-3 text-[clamp(1.9rem,3.6vw,2.75rem)] font-bold leading-[1.05] tracking-[-0.035em] text-navy">
+                  <h2 className="mt-3 text-[clamp(2.5rem,5vw,4.2rem)] font-bold leading-[1.02] tracking-[-0.04em] text-navy">
                     Built on six non-negotiables.
                   </h2>
                 </div>
@@ -213,7 +213,7 @@ export default function SixPillars() {
 
                     <div className="my-3.5 h-px w-full bg-white/10" />
 
-                    <h3 className="whitespace-pre-line font-display text-[14.5px] font-semibold leading-[1.28] tracking-[-0.015em] text-white/95">
+                    <h3 className="whitespace-pre-line font-display text-[24px] font-bold leading-[1.15] tracking-[-0.025em] text-white">
                       {item.title}
                     </h3>
                   </div>

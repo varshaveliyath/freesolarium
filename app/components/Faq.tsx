@@ -6,9 +6,9 @@ export default function Faq() {
   return (
     <section id="faq" className="bg-paper py-16 lg:py-24">
       <div className="mx-auto grid max-w-[1200px] gap-10 px-5 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16 lg:px-6">
-        <Reveal>
+        <Reveal direction="left">
           <div className="lg:sticky lg:top-24">
-            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-accent">
+            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-orange">
               Straight answers
             </p>
             <h2 className="mt-4 max-w-[10ch] text-[clamp(1.9rem,4.2vw,2.9rem)] font-bold leading-[1.05] tracking-[-0.035em] text-balance">
@@ -25,9 +25,9 @@ export default function Faq() {
               </p>
               <a
                 href={site.phoneHref}
-                className="mt-2 flex items-center gap-2 font-display text-[18px] font-bold tracking-tight text-navy transition-colors hover:text-accent"
+                className="mt-2 flex items-center gap-2 font-display text-[18px] font-bold tracking-tight text-navy transition-colors hover:text-orange"
               >
-                <Phone className="h-4 w-4 text-orange-deep" />
+                <Phone className="h-4 w-4 text-orange" />
                 {site.phoneDisplay}
               </a>
               <a
@@ -36,7 +36,7 @@ export default function Faq() {
                 )}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-3 inline-flex items-center gap-1.5 text-[12px] font-semibold text-accent transition-colors hover:text-navy"
+                className="mt-3 inline-flex items-center gap-1.5 text-[12px] font-semibold text-orange transition-colors hover:text-navy"
               >
                 <MessageCircle className="h-3.5 w-3.5" />
                 Ask on WhatsApp
@@ -48,15 +48,15 @@ export default function Faq() {
           </div>
         </Reveal>
 
-        <Reveal delay={100}>
-          <div className="border-t border-line">
-            {FAQS.map((faq) => (
-              <details key={faq.q} className="group border-b border-line">
+        <div className="border-t border-line">
+          {FAQS.map((faq, i) => (
+            <Reveal key={faq.q} direction="right" delay={i * 65}>
+              <details className="group border-b border-line">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 [&::-webkit-details-marker]:hidden">
-                  <span className="text-[14.5px] font-bold leading-snug text-navy transition-colors group-hover:text-accent">
+                  <span className="text-[14.5px] font-bold leading-snug text-navy transition-colors group-hover:text-orange">
                     {faq.q}
                   </span>
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-line bg-white text-accent transition-transform duration-300 group-open:rotate-45">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-line bg-white text-orange transition-transform duration-300 group-open:rotate-45">
                     <Plus className="h-3.5 w-3.5" strokeWidth={2.5} />
                   </span>
                 </summary>
@@ -64,9 +64,9 @@ export default function Faq() {
                   {faq.a}
                 </p>
               </details>
-            ))}
-          </div>
-        </Reveal>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   );

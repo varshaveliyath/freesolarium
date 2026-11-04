@@ -38,7 +38,7 @@ function FileUpload({
     <div>
       <label className="mb-1.5 block text-[12px] font-semibold text-slate-700">
         {label}
-        {required && <span className="ml-0.5 text-orange-500">*</span>}
+        {required && <span className="ml-0.5 text-orange">*</span>}
         {hint && <span className="ml-1.5 font-normal text-slate-400">{hint}</span>}
       </label>
       <div
@@ -46,7 +46,7 @@ function FileUpload({
         className={`flex min-h-[52px] cursor-pointer items-center gap-3 rounded-xl border-[1.5px] border-dashed px-4 py-3 transition-colors ${
           value
             ? "border-emerald-400 bg-emerald-50"
-            : "border-slate-200 bg-white hover:border-orange-400 hover:bg-orange-50/40"
+            : "border-slate-200 bg-white hover:border-orange hover:bg-orange-soft/50"
         }`}
       >
         <Paperclip className={`h-4 w-4 shrink-0 ${value ? "text-emerald-500" : "text-slate-400"}`} />
@@ -101,7 +101,7 @@ function Field({
     <div>
       <label htmlFor={id} className="mb-1.5 block text-[12px] font-semibold text-slate-700">
         {label}
-        {required && <span className="ml-0.5 text-orange-500">*</span>}
+        {required && <span className="ml-0.5 text-orange">*</span>}
       </label>
       {children}
       {error && (
@@ -112,10 +112,10 @@ function Field({
 }
 
 const inputCls =
-  "h-11 w-full rounded-xl border border-slate-200 bg-white px-3.5 text-[13px] font-medium text-slate-800 outline-none transition placeholder:font-normal placeholder:text-slate-400 focus:border-orange-400 focus:ring-2 focus:ring-orange-400/20";
+  "h-11 w-full rounded-xl border border-slate-200 bg-white px-3.5 text-[13px] font-medium text-slate-800 outline-none transition placeholder:font-normal placeholder:text-slate-400 focus:border-orange focus:ring-2 focus:ring-orange/20";
 
 const selectCls =
-  "h-11 w-full cursor-pointer appearance-none rounded-xl border border-slate-200 bg-white px-3.5 pr-10 text-[13px] font-medium text-slate-800 outline-none transition focus:border-orange-400 focus:ring-2 focus:ring-orange-400/20";
+  "h-11 w-full cursor-pointer appearance-none rounded-xl border border-slate-200 bg-white px-3.5 pr-10 text-[13px] font-medium text-slate-800 outline-none transition focus:border-orange focus:ring-2 focus:ring-orange/20";
 
 function Select({ id, options, value, onChange, placeholder }: {
   id: string;
@@ -159,8 +159,6 @@ type FormState = {
   nameSame: string;
   loanRequirement: string;
   tentativePaymentDate: string;
-  tokenAmount: string;
-  quotationId: string;
   shadowLength: string;
   shadowWidth: string;
   remarks: string;
@@ -183,7 +181,7 @@ const EMPTY_FORM: FormState = {
   referralPartner: "", referralNo: "", customerName: "", contactNo: "",
   pincode: "", city: "", email: "", discom: "", projectType: "",
   nameSame: "", loanRequirement: "", tentativePaymentDate: "",
-  tokenAmount: "", quotationId: "", shadowLength: "", shadowWidth: "", remarks: "",
+  shadowLength: "", shadowWidth: "", remarks: "",
 };
 
 const EMPTY_FILES: FileState = {
@@ -288,7 +286,7 @@ export default function BookPage() {
             Back
           </Link>
           <div className="text-center">
-            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-orange-500">Solarium</p>
+            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-orange">Solarium</p>
             <p className="text-[13px] font-bold text-[#034982]">New Order Form</p>
           </div>
           <div className="text-right text-[11px] font-semibold text-slate-400">
@@ -299,7 +297,7 @@ export default function BookPage() {
         {/* Progress bar */}
         <div className="h-[3px] bg-slate-100">
           <div
-            className="h-full bg-orange-500 transition-all duration-500"
+            className="h-full bg-orange transition-all duration-500"
             style={{ width: `${((section + 1) / SECTIONS.length) * 100}%` }}
           />
         </div>
@@ -317,7 +315,7 @@ export default function BookPage() {
                     i < section
                       ? "bg-emerald-500 text-white"
                       : i === section
-                        ? "bg-orange-500 text-white"
+                        ? "bg-orange text-white"
                         : "border border-slate-200 bg-white text-slate-400"
                   }`}
                 >
@@ -375,15 +373,6 @@ export default function BookPage() {
                 </Field>
                 <Field id="projectType" label="Type of Project" required error={errors.projectType}>
                   <Select id="projectType" options={PROJECT_TYPES} value={form.projectType} onChange={(v) => set("projectType", v)} placeholder="Select type" />
-                </Field>
-              </div>
-
-              <div className="grid gap-5 sm:grid-cols-2">
-                <Field id="quotationId" label="Quotation ID">
-                  <input id="quotationId" className={inputCls} placeholder="e.g. SOL-Q-2024-001" value={form.quotationId} onChange={(e) => set("quotationId", e.target.value)} />
-                </Field>
-                <Field id="tokenAmount" label="Token Amount">
-                  <input id="tokenAmount" className={inputCls} inputMode="numeric" placeholder="₹" value={form.tokenAmount} onChange={(e) => set("tokenAmount", e.target.value)} />
                 </Field>
               </div>
 
@@ -478,7 +467,7 @@ export default function BookPage() {
                 <textarea
                   id="remarks"
                   rows={4}
-                  className="w-full resize-none rounded-xl border border-slate-200 bg-white px-3.5 py-3 text-[13px] font-medium text-slate-800 outline-none transition placeholder:font-normal placeholder:text-slate-400 focus:border-orange-400 focus:ring-2 focus:ring-orange-400/20"
+                  className="w-full resize-none rounded-xl border border-slate-200 bg-white px-3.5 py-3 text-[13px] font-medium text-slate-800 outline-none transition placeholder:font-normal placeholder:text-slate-400 focus:border-orange focus:ring-2 focus:ring-orange/20"
                   placeholder="Any additional details about this order not captured above…"
                   value={form.remarks}
                   onChange={(e) => set("remarks", e.target.value)}
@@ -503,8 +492,6 @@ export default function BookPage() {
                   ["DISCOM", form.discom || "—"],
                   ["Project Type", form.projectType || "—"],
                   ["Referral Partner", form.referralPartner || "—"],
-                  ["Quotation ID", form.quotationId || "—"],
-                  ["Token Amount", form.tokenAmount ? `₹${form.tokenAmount}` : "—"],
                   ["Loan Requirement", form.loanRequirement || "—"],
                   ["Shadow Area", form.shadowLength && form.shadowWidth ? `${form.shadowLength} × ${form.shadowWidth} mtr` : "—"],
                 ].map(([label, value]) => (
@@ -575,7 +562,7 @@ export default function BookPage() {
               type="button"
               onClick={submit}
               disabled={submitting}
-              className="flex items-center gap-2 rounded-xl bg-orange-500 px-7 py-3 text-[13.5px] font-extrabold text-white shadow-[0_8px_24px_-8px_rgba(245,132,1,0.55)] transition hover:bg-orange-600 disabled:cursor-not-allowed disabled:opacity-60"
+              className="flex items-center gap-2 rounded-xl bg-orange px-7 py-3 text-[13.5px] font-extrabold text-white shadow-[0_8px_24px_-8px_rgba(223,122,28,0.55)] transition hover:bg-[#cc6d14] disabled:cursor-not-allowed disabled:opacity-60"
             >
               {submitting ? <><Loader2 className="h-4 w-4 animate-spin" />Submitting…</> : "Submit Order"}
             </button>

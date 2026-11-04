@@ -629,7 +629,7 @@ export default function BookingSection() {
                   <ArrowRight className="h-4 w-4" />
                 </button>
                 <p className="mt-3 text-[10.5px] leading-relaxed text-muted">
-                  No payment now. By continuing you agree to be contacted by
+                  Pay & get 100% subsidy in return. By continuing you agree to be contacted by
                   Solarium for verification and installation.
                 </p>
               </div>

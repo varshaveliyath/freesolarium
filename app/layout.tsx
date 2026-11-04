@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   ),
   title: "Solarium 2.18 kW Home Solar — ₹0 Under PM Surya Ghar",
   description:
-    "A complete 2.18 kW rooftop solar system for Gujarat homes at an effective cost of ₹0 after central and state subsidy. 5-year insurance included. Book online — no payment now.",
+    "A complete 2.18 kW rooftop solar system for Gujarat homes at an effective cost of ₹0 after central and state subsidy. 5-year insurance included. Book online — pay & get 100% subsidy in return.",
   keywords: [
     "PM Surya Ghar",
     "free solar Gujarat",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Solar for your home at ₹0 — Solarium",
     description:
-      "A complete 2.18 kW rooftop solar system for eligible Gujarat homes. Book online — no payment now.",
+      "A complete 2.18 kW rooftop solar system for eligible Gujarat homes. Book online — pay & get 100% subsidy in return.",
     images: ["/images/home-solar.png"],
   },
 };

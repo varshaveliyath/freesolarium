@@ -1,29 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { HERO_PRICE, inr } from "../lib/content";
 
 export default function MobileCta() {
-  const [inBooking, setInBooking] = useState(false);
-
-  useEffect(() => {
-    const target = document.getElementById("book");
-    if (!target || typeof IntersectionObserver === "undefined") return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        setInBooking(entries.some((entry) => entry.isIntersecting));
-      },
-      { threshold: 0.08 }
-    );
-
-    observer.observe(target);
-    return () => observer.disconnect();
-  }, []);
-
-  if (inBooking) return null;
-
   return (
     <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-white/95 pb-[env(safe-area-inset-bottom)] shadow-[0_-12px_30px_-20px_rgba(16,35,26,0.5)] backdrop-blur-md sm:hidden">
       <div className="flex items-center justify-between gap-3 px-4 py-2.5">
@@ -37,7 +17,7 @@ export default function MobileCta() {
           </p>
         </div>
         <a
-          href="#book"
+          href="/book"
           className="inline-flex min-h-[44px] items-center gap-1.5 rounded-xl bg-navy px-4 text-[12.5px] font-bold text-paper"
         >
           Book my system

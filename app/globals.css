@@ -7,12 +7,12 @@
   --color-navy-line: #2c6f9f;
   --color-paper: #f7f9fc;
   --color-paper-deep: #edf3f9;
-  --color-orange: #f58401;
-  --color-orange-deep: #b45309;
-  --color-orange-soft: #fff2e4;
+  --color-orange: #df7a1c;
+  --color-orange-deep: #df7a1c;
+  --color-orange-soft: #fdf3ea;
   --color-mist: #e9f2f9;
-  --color-accent: #b45309;
-  --color-accent-bright: #d96a0b;
+  --color-accent: #df7a1c;
+  --color-accent-bright: #df7a1c;
   --color-ink: #072d4d;
   --color-body: #3d566d;
   --color-muted: #5d7287;
@@ -57,7 +57,7 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-accent);
+    outline: 2px solid var(--color-orange);
     outline-offset: 3px;
   }
 }
@@ -79,26 +79,38 @@
 .sun-glow {
   background: radial-gradient(
     closest-side,
-    rgba(245, 132, 1, 0.32),
-    rgba(245, 132, 1, 0.09) 58%,
-    rgba(245, 132, 1, 0)
+    rgba(223, 122, 28, 0.32),
+    rgba(223, 122, 28, 0.09) 58%,
+    rgba(223, 122, 28, 0)
   );
 }
 
-/* ── Scroll reveal ─────────────────────────────────────────────────── */
+/* ── Scroll reveal (slide-in + fade-in) ────────────────────────────── */
 
 .reveal {
   opacity: 0;
-  transform: translateY(22px);
+  transform: translate3d(0, 28px, 0);
   transition:
-    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
+}
+
+.reveal-left {
+  transform: translate3d(-32px, 0, 0);
+}
+
+.reveal-right {
+  transform: translate3d(32px, 0, 0);
+}
+
+.reveal-scale {
+  transform: translate3d(0, 18px, 0) scale(0.96);
 }
 
 .reveal.is-visible {
   opacity: 1;
-  transform: none;
+  transform: translate3d(0, 0, 0) scale(1);
 }
 
 /* ── Marquee ───────────────────────────────────────────────────────── */

@@ -1,11 +1,16 @@
+import Image from "next/image";
+import Link from "next/link";
 import { ArrowUpRight, Mail, MapPin, Phone, ShieldCheck } from "lucide-react";
 import { DISCLAIMER, site } from "../lib/content";
 
 const LINKS = [
   { label: "What you get", href: "#product" },
+  { label: "Institutional clients", href: "#clients" },
+  { label: "The 6S", href: "#six-s" },
   { label: "How it works", href: "#how" },
   { label: "FAQ", href: "#faq" },
-  { label: "Book my system", href: "#book" },
+  { label: "Get your quotation", href: "#quotation" },
+  { label: "Book my system", href: "/book" },
 ];
 
 const SOCIALS = [
@@ -20,18 +25,16 @@ export default function Footer() {
       <div className="mx-auto max-w-[1200px] px-5 pb-24 pt-14 sm:pb-10 lg:px-6 lg:pt-16">
         <div className="grid gap-10 lg:grid-cols-[1.35fr_0.7fr_1.05fr] lg:gap-14">
           <div>
-            <div className="flex items-center gap-2.5">
-              <svg viewBox="0 0 32 32" className="h-7 w-7" fill="none" aria-hidden="true">
-                <circle cx="16" cy="16" r="5.2" fill="#F4B400" />
-                <g stroke="#F4B400" strokeWidth="2" strokeLinecap="round">
-                  <path d="M16 2.5v3.6M16 25.9v3.6M2.5 16h3.6M25.9 16h3.6" />
-                  <path d="M6.5 6.5l2.5 2.5M23 23l2.5 2.5M25.5 6.5L23 9M9 23l-2.5 2.5" />
-                </g>
-              </svg>
-              <span className="font-display text-[20px] font-extrabold tracking-[-0.03em]">
-                {site.brand}
-              </span>
-            </div>
+            <a href="#top" className="inline-flex items-center">
+              <Image
+                src="/images/solarium-logo-white.png"
+                alt="Solarium Green Energy"
+                width={3349}
+                height={1119}
+                sizes="130px"
+                className="h-8 w-auto"
+              />
+            </a>
             <p className="mt-3 max-w-[300px] text-[12px] leading-relaxed text-paper/55">
               India&apos;s integrated solar company — modules, engineering and
               installation under one roof since 2018.
@@ -70,12 +73,22 @@ export default function Footer() {
             <ul className="mt-4 space-y-2.5">
               {LINKS.map((link) => (
                 <li key={link.href}>
-                  <a
-                    href={link.href}
-                    className="text-[12.5px] font-medium text-paper/70 transition-colors hover:text-orange"
-                  >
-                    {link.label}
-                  </a>
+                  {link.href.startsWith("/") ? (
+                    <Link
+                      href={link.href}
+                      className="inline-flex items-center gap-1 text-[12.5px] font-semibold text-orange transition-colors hover:text-white"
+                    >
+                      {link.label}
+                      <ArrowUpRight className="h-3.5 w-3.5" />
+                    </Link>
+                  ) : (
+                    <a
+                      href={link.href}
+                      className="text-[12.5px] font-medium text-paper/70 transition-colors hover:text-orange"
+                    >
+                      {link.label}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>

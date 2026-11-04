@@ -19,8 +19,8 @@ function BrandLogo() {
       width={3349}
       height={1119}
       priority
-      sizes="136px"
-      className="h-9 w-auto lg:h-10"
+      sizes="120px"
+      className="h-7 w-auto lg:h-8"
     />
   );
 }
@@ -69,48 +69,48 @@ export default function Header() {
         ${hidden ? "-translate-y-full" : "translate-y-0"}
       `}
     >
-      <div className="mx-auto flex h-[72px] max-w-[1200px] items-center justify-between gap-4 px-5 lg:px-6">
+      <div className="mx-auto flex h-[56px] max-w-[1200px] items-center justify-between gap-4 px-5 lg:px-6">
         <a
           href="#top"
           className="flex items-center gap-2.5"
           onClick={() => setOpen(false)}
         >
           <BrandLogo />
-          <span className="ml-1 hidden rounded-full border border-line bg-paper px-2.5 py-1 text-[10px] font-semibold tracking-wide text-muted sm:inline-block">
+          <span className="ml-1 hidden rounded-full border border-line bg-paper px-2.5 py-0.5 text-[10px] font-semibold tracking-wide text-muted sm:inline-block">
             BSE Listed
           </span>
         </a>
 
-        <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">
+        <nav className="hidden items-center gap-7 lg:flex" aria-label="Primary">
           {NAV.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className="text-sm font-medium text-navy/70 transition-colors hover:text-accent"
+              className="text-[13px] font-medium text-navy/70 transition-colors hover:text-accent"
             >
               {item.label}
             </a>
           ))}
           <a
             href={site.phoneHref}
-            className="hidden items-center gap-1.5 text-sm font-semibold text-navy/70 transition-colors hover:text-accent xl:flex"
+            className="hidden items-center gap-1.5 text-[13px] font-semibold text-navy/70 transition-colors hover:text-accent xl:flex"
           >
             <Phone className="h-3.5 w-3.5 text-orange-deep" />
             {site.phoneDisplay}
           </a>
           <a
-            href="#book"
-            className="group inline-flex items-center gap-1.5 rounded-full bg-navy px-5 py-2.5 text-[13px] font-bold text-white transition-colors hover:bg-navy-soft"
+            href="/book"
+            className="group inline-flex items-center gap-1.5 rounded-full bg-navy px-4 py-1.5 text-[12.5px] font-bold text-white transition-colors hover:bg-navy-soft"
           >
             Book at ₹0
-            <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
         </nav>
 
         <div className="flex items-center gap-2 lg:hidden">
           <a
-            href="#book"
-            className="inline-flex items-center gap-1 rounded-full bg-navy px-4 py-2 text-[12px] font-bold text-white"
+            href="/book"
+            className="inline-flex items-center gap-1 rounded-full bg-navy px-3.5 py-1.5 text-[11.5px] font-bold text-white"
           >
             Book at ₹0
           </a>
@@ -120,7 +120,7 @@ export default function Header() {
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? "Close menu" : "Open menu"}
-            className="rounded-full p-2 text-navy/70 transition-colors hover:bg-paper-deep hover:text-navy"
+            className="rounded-full p-1.5 text-navy/70 transition-colors hover:bg-paper-deep hover:text-navy"
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -152,7 +152,7 @@ export default function Header() {
             </a>
           </nav>
           <a
-            href="#book"
+            href="/book"
             onClick={() => setOpen(false)}
             className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-orange px-5 py-3.5 text-sm font-bold text-ink"
           >

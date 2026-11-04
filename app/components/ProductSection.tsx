@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { ShieldCheck } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { INCLUDED } from "../lib/content";
 import Reveal from "./Reveal";
@@ -156,8 +155,8 @@ export default function ProductSection() {
             <span
               className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[10.5px] font-bold uppercase tracking-[0.12em] text-orange"
               style={{
-                background: "rgba(245,132,1,0.12)",
-                border: "1px solid rgba(245,132,1,0.22)",
+                background: "rgba(223,122,28,0.14)",
+                border: "1px solid rgba(223,122,28,0.28)",
               }}
             >
               Included
@@ -180,7 +179,7 @@ export default function ProductSection() {
         {/* Edge highlight on hover */}
         <div
           className="pointer-events-none absolute inset-0 rounded-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-          style={{ border: "1px solid rgba(245,132,1,0.28)" }}
+          style={{ border: "1px solid rgba(223,122,28,0.32)" }}
         />
       </div>
     );
@@ -191,10 +190,10 @@ export default function ProductSection() {
 
       {/* ── Static header + insurance ── */}
       <div className="mx-auto max-w-[1200px] px-5 pb-12 pt-16 lg:px-6 lg:pt-24">
-        <Reveal>
+        <Reveal direction="left">
           <div className="max-w-[720px]">
-            <p className="flex items-center gap-2.5 text-[11px] font-bold uppercase tracking-[0.2em] text-accent">
-              <span className="h-px w-8 bg-accent/50" aria-hidden="true" />
+            <p className="flex items-center gap-2.5 text-[11px] font-bold uppercase tracking-[0.2em] text-orange">
+              <span className="h-px w-8 bg-orange/50" aria-hidden="true" />
               What you get
             </p>
             <h2 className="mt-4 text-[clamp(1.9rem,4.2vw,2.9rem)] font-bold leading-[1.05] tracking-[-0.035em] text-navy text-balance">
@@ -208,21 +207,26 @@ export default function ProductSection() {
         </Reveal>
 
         {/* Insurance banner */}
-        <Reveal>
-          <div className="mt-10 relative overflow-hidden rounded-2xl bg-navy p-6 sm:p-9 text-paper">
-            <div className="pointer-events-none absolute -right-16 -top-24 h-72 w-72 rounded-full bg-orange/20 blur-3xl" aria-hidden="true" />
-            <div className="pointer-events-none absolute -left-10 bottom-0 h-40 w-40 rounded-full bg-navy-soft/40 blur-2xl" aria-hidden="true" />
-            <div className="relative flex flex-wrap items-center justify-between gap-6">
-              <div className="max-w-[560px]">
-                <span className="inline-flex rounded-full bg-orange px-3 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-navy">Only at Solarium</span>
-                <h3 className="mt-3 font-display text-[clamp(1.5rem,3vw,2rem)] font-bold leading-tight tracking-[-0.03em]">5-year insurance. Free.</h3>
-                <p className="mt-2 text-[13.5px] leading-relaxed text-paper/70">
-                  Your system is insured for five years at no extra cost. Cover, the insurer and the claim process are set out in the policy document shared with your order.
-                </p>
-              </div>
-              <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-orange/30 bg-orange/10 sm:h-20 sm:w-20">
-                <ShieldCheck className="h-8 w-8 text-orange sm:h-10 sm:w-10" strokeWidth={1.5} />
-              </div>
+        <Reveal direction="up" delay={120}>
+          <div className="relative mt-10 overflow-hidden rounded-2xl p-6 text-paper sm:p-9">
+            {/* Background image (previously used in hero) */}
+            <div className="absolute inset-0 z-0">
+              <Image
+                src="/images/hero-manufacturing.webp"
+                alt="Solarium solar manufacturing facility"
+                fill
+                sizes="(max-width: 1200px) 100vw, 1200px"
+                className="object-cover object-center"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#022b4e]/90 via-[#034982]/75 to-[#034982]/35" />
+            </div>
+
+            <div className="relative z-10 max-w-[560px]">
+              <span className="inline-flex rounded-full bg-orange px-3 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-white">Only at Solarium</span>
+              <h3 className="mt-3 font-display text-[clamp(1.5rem,3vw,2rem)] font-bold leading-tight tracking-[-0.03em]">5-year insurance. Free.</h3>
+              <p className="mt-2 text-[13.5px] leading-relaxed text-paper/80">
+                Your system is insured for five years at no extra cost. Cover, the insurer and the claim process are set out in the policy document shared with your order.
+              </p>
             </div>
           </div>
         </Reveal>
@@ -315,7 +319,7 @@ export default function ProductSection() {
       </div>
 
       {/* Transition back to light bg */}
-      <div className="h-16 bg-paper lg:h-24" />
+      <div className="h-6 bg-paper lg:hidden" />
     </section>
   );
 }

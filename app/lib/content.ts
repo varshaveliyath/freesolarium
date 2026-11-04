@@ -54,7 +54,7 @@ export const TRUST_STATS = [
   { value: "25,000+", label: "Homes solarised" },
   { value: "Since 2018", label: "In rooftop solar" },
   { value: "BSE listed", label: "Public, audited company" },
-  { value: "#1 in Gujarat*", label: "PM Surya Ghar installations" },
+  { value: "#1 in Gujarat*", label: "Home rooftop solar" },
 ] as const;
 
 export const INCLUDED = [
@@ -105,37 +105,37 @@ export const JOURNEY = [
     n: "01",
     title: "Book online",
     when: "Today",
-    body: "Choose your setup and share basic details. No payment to reserve.",
+    body: "Share basic details. Pay & get 100% subsidy back.",
   },
   {
     n: "02",
     title: "Share documents",
     when: "Same day",
-    body: "Electricity bill, rooftop and house photos — here or on WhatsApp.",
+    body: "Upload bill and roof photos here or on WhatsApp.",
   },
   {
     n: "03",
     title: "Rooftop survey",
     when: "We call to schedule",
-    body: "We check your roof, connection and load, and confirm what fits.",
+    body: "We inspect your roof, load and connection.",
   },
   {
     n: "04",
     title: "Final confirmation",
     when: "Before work starts",
-    body: "You approve the final amount, including any customisation, in writing.",
+    body: "Approve the final quote before work starts.",
   },
   {
     n: "05",
     title: "Installation",
     when: "After your approval",
-    body: "Our own team installs and commissions the system, then hands over.",
+    body: "Our team installs, tests and hands over the system.",
   },
   {
     n: "06",
     title: "Subsidy & net meter",
     when: "As per DISCOM",
-    body: "We file the subsidy claim and net-meter paperwork along with you.",
+    body: "We file net-meter and subsidy paperwork with you.",
   },
 ] as const;
 

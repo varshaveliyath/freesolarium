@@ -9,6 +9,7 @@ import HowItWorks from "./components/HowItWorks";
 import Institutions from "./components/Institutions";
 import MobileCta from "./components/MobileCta";
 import ProductSection from "./components/ProductSection";
+import SixPillars from "./components/SixPillars";
 import TrustStrip from "./components/TrustStrip";
 import { FAQS } from "./lib/content";
 
@@ -39,6 +40,7 @@ export default function Page() {
         <TrustStrip />
         <ProductSection />
         <Institutions />
+        <SixPillars />
         <HowItWorks />
         <Faq />
         <FinalCta />

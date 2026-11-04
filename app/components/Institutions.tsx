@@ -8,17 +8,27 @@ const CLIENT_LOGOS = [
   { src: "/clients/indian-railways.png", alt: "Indian Railways" },
   { src: "/clients/ntpc.png",            alt: "NTPC" },
   { src: "/clients/lic.webp",            alt: "LIC" },
+  { src: "/clients/geb.png",             alt: "Gujarat Electricity Board" },
+  { src: "/clients/bank-of-india.webp",  alt: "Bank of India" },
+  { src: "/clients/itbp.png",            alt: "ITBP" },
+  { src: "/clients/hindustan-petroleum.webp", alt: "Hindustan Petroleum" },
+  { src: "/clients/counter-insurgency-force.webp", alt: "Counter Insurgency Force" },
+  { src: "/clients/agl.webp",            alt: "AGL" },
+  { src: "/clients/ahmedabad-university.webp", alt: "Ahmedabad University" },
+  { src: "/clients/gudc.webp",           alt: "Gujarat Urban Development Company" },
+  { src: "/clients/goa-shipyard.webp",   alt: "Goa Shipyard" },
+  { src: "/clients/bsf.webp",            alt: "Border Security Force" },
 ];
 
 export default function Institutions() {
   return (
-    <section className="border-y border-line bg-white py-14 lg:py-20">
-      <div className="mx-auto grid max-w-[1200px] gap-9 px-5 lg:grid-cols-[0.92fr_1.08fr] lg:items-center lg:gap-16 lg:px-6">
+    <section id="clients" className="border-y border-line bg-white py-14 lg:py-20">
+      <div className="mx-auto grid max-w-[1200px] gap-9 px-5 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:gap-14 lg:px-6">
 
         {/* ── Left: copy ── */}
-        <Reveal>
+        <Reveal direction="left">
           <div>
-            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-accent">
+            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-orange">
               Institutional track record
             </p>
             <h2 className="mt-4 max-w-[18ch] text-[clamp(1.75rem,3.6vw,2.5rem)] font-bold leading-[1.08] tracking-[-0.035em] text-balance">
@@ -37,28 +47,29 @@ export default function Institutions() {
         </Reveal>
 
         {/* ── Right: logo grid ── */}
-        <Reveal delay={100}>
-          <div className="grid grid-cols-3 gap-3 sm:grid-cols-3">
-            {CLIENT_LOGOS.map((logo) => (
-              <div
-                key={logo.alt}
-                className="flex items-center justify-center rounded-xl border border-line bg-paper/60 p-3 sm:p-5 transition-all duration-200 hover:border-line-strong hover:bg-white hover:shadow-sm"
-              >
-                <Image
-                  src={logo.src}
-                  alt={logo.alt}
-                  width={120}
-                  height={64}
-                  className="h-10 w-auto object-contain sm:h-16"
-                />
-              </div>
+        <div>
+          <div className="grid grid-cols-4 gap-2 sm:gap-3">
+            {CLIENT_LOGOS.map((logo, i) => (
+              <Reveal key={logo.alt} direction="scale" delay={(i % 4) * 55 + Math.floor(i / 4) * 45}>
+                <div className="flex h-16 items-center justify-center rounded-xl border border-line bg-paper/60 p-2 transition-all duration-200 hover:border-line-strong hover:bg-white hover:shadow-sm sm:h-22 sm:p-3">
+                  <Image
+                    src={logo.src}
+                    alt={logo.alt}
+                    width={120}
+                    height={64}
+                    className="max-h-9 w-auto max-w-full object-contain sm:max-h-12"
+                  />
+                </div>
+              </Reveal>
             ))}
           </div>
-          <p className="mt-4 text-[10px] leading-relaxed text-muted">
-            Institution names refer to projects executed. No endorsement of
-            this offer is implied.
-          </p>
-        </Reveal>
+          <Reveal delay={220}>
+            <p className="mt-4 text-[10px] leading-relaxed text-muted">
+              Institution names refer to projects executed. No endorsement of
+              this offer is implied.
+            </p>
+          </Reveal>
+        </div>
 
       </div>
     </section>

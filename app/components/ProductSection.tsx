@@ -5,23 +5,10 @@ import { useEffect, useRef } from "react";
 import { INCLUDED } from "../lib/content";
 import Reveal from "./Reveal";
 
-/* ─── Card images ─── */
-const CARD_IMAGES: Record<
-  (typeof INCLUDED)[number]["icon"],
-  { src: string; alt: string }
-> = {
-  panels:    { src: "/images/hero-solar-panels-1280.webp",      alt: "Solarium solar modules on a rooftop" },
-  inverter:  { src: "/images/solar-inverter-installation.webp", alt: "On-grid solar inverter installed on wall" },
-  structure: { src: "/images/solar-mounting-kit.webp",          alt: "ZAM mounting structure components" },
-  bos:       { src: "/images/solar-net-meter-kit.webp",         alt: "Net meter and electrical BOS components" },
-  tools:     { src: "/images/stat_house.png",                   alt: "Solarium installation team at work" },
-  service:   { src: "/images/solar-monitoring-app.webp",        alt: "Solarium solar monitoring app on phone" },
-};
-
 /* ─── Layout constants ─── */
-const CARD_W   = 320;  // px — card width on desktop
+const CARD_W   = 315;  // px — card width on desktop (compact)
 const CARD_GAP = 20;   // px — gap between cards
-const N        = INCLUDED.length; // 6
+const N        = INCLUDED.length; // 10
 
 export default function ProductSection() {
   const outerRef    = useRef<HTMLDivElement>(null);
@@ -41,29 +28,27 @@ export default function ProductSection() {
       const scrollableH = height - window.innerHeight;
       const progress    = Math.min(Math.max(scrolled / scrollableH, 0), 1);
 
-      // paddingLeft in px (mirrors the inline style below)
+      // paddingLeft in px (mirrors container margin)
       const pl = Math.max(24, (window.innerWidth - 1200) / 2 + 24);
 
-      // When progress === 1 the LAST card should be centered in the viewport.
-      // center of last card (in track coords) = pl + (N-1)*(CARD_W+CARD_GAP) + CARD_W/2
-      // We want that to sit at window.innerWidth/2, so:
-      const lastCardCenter = pl + (N - 1) * (CARD_W + CARD_GAP) + CARD_W / 2;
-      const maxSlide = Math.max(lastCardCenter - window.innerWidth / 2, 0);
+      // Track total travel distance
+      const totalWidth = pl + N * CARD_W + (N - 1) * CARD_GAP + pl;
+      const maxSlide = Math.max(totalWidth - window.innerWidth, 0);
       const translateX = progress * maxSlide;
 
       track.style.transform = `translateX(-${translateX}px)`;
       if (bar) bar.style.width = `${progress * 100}%`;
 
       // highlight active dot
-      const activeIndex = Math.min(Math.round(progress * (N - 1)), N - 1);
+      const activeIndex = Math.min(Math.floor(progress * N), N - 1);
       dotRefs.current.forEach((dot, i) => {
         if (!dot) return;
         if (i === activeIndex) {
-          dot.style.width   = "28px";
+          dot.style.width   = "24px";
           dot.style.opacity = "1";
           dot.style.background = "var(--color-orange)";
         } else {
-          dot.style.width   = "8px";
+          dot.style.width   = "7px";
           dot.style.opacity = "0.35";
           dot.style.background = "white";
         }
@@ -71,13 +56,15 @@ export default function ProductSection() {
     }
 
     window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
     onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
-  // At ~1280px viewport: pl≈64, lastCardCenter≈64+5*340+160=684, maxSlide≈684-640=44... too small
-  // Using a fixed safe value based on actual card travel distance.
-  const extraScroll = 1800;
+  const extraScroll = 2800;
 
   /* ── shared card renderer ── */
   function Card({
@@ -89,97 +76,114 @@ export default function ProductSection() {
     index: number;
     mobile?: boolean;
   }) {
-    const img = CARD_IMAGES[item.icon];
     return (
       <div
-        className="group relative flex shrink-0 flex-col overflow-hidden rounded-3xl"
+        className="group relative flex shrink-0 flex-col overflow-hidden rounded-2xl transition-all duration-300"
         style={{
-          width: mobile ? "300px" : `${CARD_W}px`,
+          width: mobile ? "295px" : `${CARD_W}px`,
           background: "linear-gradient(160deg, #0c2d4a 0%, #051d33 100%)",
           boxShadow: mobile
-            ? "0 8px 32px -8px rgba(2,27,51,0.55)"
-            : "0 32px 80px -24px rgba(2,27,51,0.75), inset 0 1px 0 rgba(255,255,255,0.06)",
+            ? "0 8px 28px -8px rgba(2,27,51,0.55)"
+            : "0 24px 60px -20px rgba(2,27,51,0.75), inset 0 1px 0 rgba(255,255,255,0.06)",
         }}
       >
         {/* ── Image ── */}
         <div
-          className="relative w-full overflow-hidden"
-          style={{ aspectRatio: mobile ? "16/9" : "4/3" }}
+          className="relative w-full overflow-hidden bg-[#031525]"
+          style={{ height: mobile ? "140px" : "155px" }}
         >
           <Image
-            src={img.src}
-            alt={img.alt}
+            src={item.image}
+            alt={item.imageAlt}
             fill
-            sizes={mobile ? "300px" : "320px"}
+            sizes={mobile ? "295px" : "315px"}
             className="object-cover transition-transform duration-700 group-hover:scale-[1.06]"
           />
           {/* Dark gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#051d33]/80 via-[#051d33]/20 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#051d33] via-[#051d33]/40 to-transparent" />
 
           {/* Number badge — top-left */}
           <span
-            className="absolute left-4 top-4 flex h-8 w-8 items-center justify-center rounded-full text-[11px] font-extrabold text-white"
+            className="absolute left-3.5 top-3.5 flex h-7 w-7 items-center justify-center rounded-full text-[10.5px] font-extrabold text-white"
             style={{
-              background: "rgba(255,255,255,0.12)",
-              backdropFilter: "blur(8px)",
-              border: "1px solid rgba(255,255,255,0.18)",
+              background: "rgba(255,255,255,0.14)",
+              backdropFilter: "blur(10px)",
+              border: "1px solid rgba(255,255,255,0.22)",
             }}
           >
             {String(index + 1).padStart(2, "0")}
           </span>
+
+          {/* Category Tag badge — top-right */}
+          <span
+            className="absolute right-3.5 top-3.5 rounded-full px-2 py-0.5 text-[9.5px] font-semibold text-white/90"
+            style={{
+              background: "rgba(5,29,51,0.8)",
+              backdropFilter: "blur(8px)",
+              border: "1px solid rgba(255,255,255,0.15)",
+            }}
+          >
+            {item.tag}
+          </span>
         </div>
 
         {/* ── Body ── */}
-        <div className="flex flex-1 flex-col p-6" style={mobile ? { padding: "1rem 1.1rem" } : {}}>
+        <div className="flex flex-1 flex-col p-4 sm:p-5" style={mobile ? { padding: "1rem" } : {}}>
           {/* Orange accent line */}
           <div
-            className="mb-4 h-[2px] w-10 rounded-full bg-orange opacity-80 transition-all duration-500 group-hover:w-16 group-hover:opacity-100"
-            style={mobile ? { marginBottom: "0.6rem" } : {}}
+            className="mb-2.5 h-[2px] w-8 rounded-full bg-orange opacity-85 transition-all duration-500 group-hover:w-14 group-hover:opacity-100"
           />
 
           <h3
-            className="font-display font-bold leading-snug tracking-[-0.02em] text-white"
-            style={{ fontSize: mobile ? "15px" : "16px" }}
+            className="font-display font-bold leading-tight tracking-[-0.02em] text-white"
+            style={{ fontSize: mobile ? "15.5px" : "16.5px" }}
           >
             {item.title}
           </h3>
+
+          <p className="mt-1 text-[11px] font-semibold text-orange leading-snug">
+            {item.subtitle}
+          </p>
+
           <p
-            className="mt-2 flex-1 leading-relaxed text-white/55"
-            style={{ fontSize: mobile ? "12px" : "12.5px" }}
+            className="mt-2 leading-relaxed text-white/65"
+            style={{ fontSize: mobile ? "11.5px" : "12px" }}
           >
             {item.body}
           </p>
 
-          {/* Bottom row — subtle "included" pill */}
-          <div className="mt-5 flex items-center justify-between" style={mobile ? { marginTop: "0.75rem" } : {}}>
-            <span
-              className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[10.5px] font-bold uppercase tracking-[0.12em] text-orange"
-              style={{
-                background: "rgba(223,122,28,0.14)",
-                border: "1px solid rgba(223,122,28,0.28)",
-              }}
-            >
-              Included
-            </span>
-            {/* Arrow — appears on hover */}
-            <span
-              className="flex h-8 w-8 items-center justify-center rounded-full opacity-0 transition-all duration-300 group-hover:opacity-100"
-              style={{
-                background: "rgba(255,255,255,0.08)",
-                border: "1px solid rgba(255,255,255,0.12)",
-              }}
-            >
-              <svg className="h-3.5 w-3.5 text-white" fill="none" viewBox="0 0 16 16" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3 8h10m0 0-3.5-3.5M13 8l-3.5 3.5" />
-              </svg>
-            </span>
-          </div>
+          {/* Divider */}
+          <div className="my-3 h-px w-full bg-white/10" />
+
+          {/* ── Specifications / Highlights ── */}
+          <ul className="space-y-1.5 flex-1">
+            {item.specs.map((spec, sIdx) => (
+              <li
+                key={sIdx}
+                className="flex items-start gap-2 text-[11px] leading-snug text-white/80"
+              >
+                <svg
+                  className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-400"
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                <span>{spec}</span>
+              </li>
+            ))}
+          </ul>
         </div>
 
         {/* Edge highlight on hover */}
         <div
-          className="pointer-events-none absolute inset-0 rounded-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-          style={{ border: "1px solid rgba(223,122,28,0.32)" }}
+          className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+          style={{ border: "1px solid rgba(223,122,28,0.35)" }}
         />
       </div>
     );
@@ -209,7 +213,7 @@ export default function ProductSection() {
         {/* Insurance banner */}
         <Reveal direction="up" delay={120}>
           <div className="relative mt-10 overflow-hidden rounded-2xl p-6 text-paper sm:p-9">
-            {/* Background image (previously used in hero) */}
+            {/* Background image */}
             <div className="absolute inset-0 z-0">
               <Image
                 src="/images/hero-manufacturing.webp"
@@ -235,11 +239,11 @@ export default function ProductSection() {
       {/* ── Mobile: swipe snap (hidden lg+) ── */}
       <div className="lg:hidden pb-12">
         <div className="mb-5 flex items-center justify-between px-5">
-          <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-muted">6 components included</p>
+          <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-muted">{INCLUDED.length} components included</p>
           <p className="text-[11px] font-semibold text-muted/60">Swipe →</p>
         </div>
         <div
-          className="hide-scrollbar flex gap-5 overflow-x-auto"
+          className="hide-scrollbar flex gap-4 overflow-x-auto pb-4"
           style={{ paddingLeft: "1.25rem", paddingRight: "1.25rem", scrollSnapType: "x mandatory" }}
         >
           {INCLUDED.map((item, i) => (
@@ -251,20 +255,23 @@ export default function ProductSection() {
       </div>
 
       {/* ── Desktop: sticky horizontal scroll (hidden mobile) ── */}
-      {/* bg-[#051525] on the outer div ensures no paper bg shows while scrolling */}
       <div
         ref={outerRef}
         style={{ height: `calc(100vh + ${extraScroll}px)` }}
         className="relative hidden bg-[#051525] lg:block"
       >
-        {/* Sticky viewport — solid dark background, no smoke */}
+        {/* Sticky viewport — solid dark background */}
         <div
           className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden bg-[#051525]"
         >
           {/* Top label row */}
-          <div className="mx-auto mb-7 w-full max-w-[1200px] px-6 flex items-end justify-end">
-            <p className="pb-1 text-[11.5px] font-semibold text-white/35 tracking-wide">
-              Scroll to explore ↓
+          <div className="mx-auto mb-6 w-full max-w-[1200px] px-6 flex items-center justify-between">
+            <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-white/50">
+              All {INCLUDED.length} Certified Components
+            </span>
+            <p className="text-[11.5px] font-semibold text-white/40 tracking-wide flex items-center gap-1.5">
+              <span>Scroll to explore</span>
+              <span>↓</span>
             </p>
           </div>
 
@@ -275,9 +282,9 @@ export default function ProductSection() {
             style={{
               gap: `${CARD_GAP}px`,
               paddingLeft: "max(1.5rem, calc((100vw - 1200px)/2 + 1.5rem))",
-              paddingRight: "80px",
+              paddingRight: "max(1.5rem, calc((100vw - 1200px)/2 + 1.5rem))",
             }}
-            aria-label="What you get — scroll to see all 6 components"
+            aria-label={`What you get — scroll to see all ${INCLUDED.length} components`}
           >
             {INCLUDED.map((item, i) => (
               <Card key={item.title} item={item} index={i} />
@@ -285,9 +292,9 @@ export default function ProductSection() {
           </div>
 
           {/* Bottom progress + dots */}
-          <div className="mx-auto mt-8 w-full max-w-[1200px] px-6 flex items-center gap-5">
+          <div className="mx-auto mt-8 w-full max-w-[1200px] px-6 flex items-center gap-6">
             {/* Dot indicators */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 shrink-0">
               {INCLUDED.map((item, i) => (
                 <span
                   key={item.title}
